@@ -1,2 +1,2 @@
 # 3D_registration
-registraion for timelaps slipping of 3D image
+registration for time-lapse slipping of 3D image
