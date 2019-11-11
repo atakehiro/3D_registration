@@ -5,3 +5,5 @@ registration for time-lapse slipping of 3D image
 MATLAB
 
 Image processing toolbox
+
+Parallel Computing Toolbox
