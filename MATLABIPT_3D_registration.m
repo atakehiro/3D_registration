@@ -1,7 +1,7 @@
 % MATLABでは4次元イメージを一気に読み込めないので、zスタックを1つずつ読み込む(合わせる見本にする画像と移動させる画像の２つ)
 % GPUを使用している
 
-%% tifファイルの読み取り targetのｚStack
+%% tifファイルの読み取り（targetのｚStack）
 tic
 [file, file_path] = uigetfile('*.tif');
 file_info = imfinfo([file_path, file]);
@@ -19,7 +19,7 @@ toc
 
 %Target = raw_IMG;
 Target = gpuArray(raw_IMG);
-%% tifファイルの読み取り suorceのｚStack
+%% tifファイルの読み取り（suorceのｚStack）
 tic
 [file, file_path] = uigetfile('*.tif');
 file_info = imfinfo([file_path, file]);
