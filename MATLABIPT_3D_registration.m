@@ -1,7 +1,7 @@
-% MATLAB‚Å‚Í4ŸŒ³ƒCƒ[ƒW‚ğˆê‹C‚É“Ç‚İ‚ß‚È‚¢‚Ì‚ÅAzƒXƒ^ƒbƒN‚ğ1‚Â‚¸‚Â“Ç‚İ‚Ş(‡‚í‚¹‚éŒ©–{‚É‚·‚é‰æ‘œ‚ÆˆÚ“®‚³‚¹‚é‰æ‘œ‚Ì‚Q‚Â)
-% GPU‚ğg—p‚µ‚Ä‚¢‚é
+% MATLABã§ã¯4æ¬¡å…ƒã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¸€æ°—ã«èª­ã¿è¾¼ã‚ãªã„ã®ã§ã€zã‚¹ã‚¿ãƒƒã‚¯ã‚’1ã¤ãšã¤èª­ã¿è¾¼ã‚€(åˆã‚ã›ã‚‹è¦‹æœ¬ã«ã™ã‚‹ç”»åƒã¨ç§»å‹•ã•ã›ã‚‹ç”»åƒã®ï¼’ã¤)
+% GPUã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹
 
-%% tifƒtƒ@ƒCƒ‹‚Ì“Ç‚İæ‚è(target‚Ì‚šStack)
+%% tifãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿å–ã‚Š targetã®ï½šStack
 tic
 [file, file_path] = uigetfile('*.tif');
 file_info = imfinfo([file_path, file]);
@@ -14,12 +14,12 @@ raw_IMG = zeros(d1,d2,T);
 for t = 1:T
     raw_IMG(:,:,t) = imread([file_path, file], t);
 end
-disp('ƒf[ƒ^“Ç‚İæ‚èŠ®—¹')
+disp('ãƒ‡ãƒ¼ã‚¿èª­ã¿å–ã‚Šå®Œäº†')
 toc
 
 %Target = raw_IMG;
 Target = gpuArray(raw_IMG);
-%% tifƒtƒ@ƒCƒ‹‚Ì“Ç‚İæ‚è(suorce‚Ì‚šStack)
+%% tifãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿å–ã‚Š suorceã®ï½šStack
 tic
 [file, file_path] = uigetfile('*.tif');
 file_info = imfinfo([file_path, file]);
@@ -32,12 +32,12 @@ raw_IMG = zeros(d1,d2,T);
 for t = 1:T
     raw_IMG(:,:,t) = imread([file_path, file], t);
 end
-disp('ƒf[ƒ^“Ç‚İæ‚èŠ®—¹')
+disp('ãƒ‡ãƒ¼ã‚¿èª­ã¿å–ã‚Šå®Œäº†')
 toc
 
 %Source = raw_IMG;
 Source = gpuArray(raw_IMG);
-%% ƒŒƒWƒXƒg
+%% ãƒ¬ã‚¸ã‚¹ãƒˆ
 tic
 %[optimizer, metric] = imregconfig('monomodal');
 %[optimizer, metric] = imregconfig('multimodal');
@@ -49,15 +49,15 @@ tic
 
 [D,moving_reg] = imregdemons(Source, Target);
 moving_reg = gather(moving_reg);
-disp('ƒŒƒWƒXƒgŠ®—¹')
+disp('ãƒ¬ã‚¸ã‚¹ãƒˆå®Œäº†')
 toc
 
-%% ‘‚«‚İ
+%% æ›¸ãè¾¼ã¿
 tic
 IMG = cast(moving_reg,['uint',num2str(bit)]);
 imwrite(IMG(:,:,1),[file_path, '3Dreged_', file,'.tif']);
 for t = 2:T
     imwrite(IMG(:,:,t),[file_path, '3Dreged_', file,'.tif'],'WriteMode','append');
 end
-disp('‘‚«‚İŠ®—¹')
+disp('æ›¸ãè¾¼ã¿å®Œäº†')
 toc
