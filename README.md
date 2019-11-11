@@ -4,6 +4,6 @@ registration for time-lapse slipping of 3D image
 # Dependencies
 MATLAB
 
-Image processing toolbox
+Image Processing Toolbox
 
 Parallel Computing Toolbox
