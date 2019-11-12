@@ -8,6 +8,7 @@ Image Processing Toolbox
 
 Parallel Computing Toolbox
 
+GPU, CUDA and GPU driver is necessary.
 
 ## Author
 Takehiro Ajioka 
