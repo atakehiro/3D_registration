@@ -1,7 +1,7 @@
 # 3D_registration
 registration for time-lapse slipping of 3D image
 
-# Dependencies
+## Dependencies
 MATLAB
 
 Image Processing Toolbox
@@ -14,7 +14,7 @@ Takehiro Ajioka
 
 E-mail:1790651m@stu.kobe-u.ac.jp
 
-# Affiliation
+## Affiliation
 
 Division of System Neuroscience, Kobe University of Graduate School of Medicine
 
