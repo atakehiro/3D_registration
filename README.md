@@ -3,7 +3,7 @@ registration for time-lapse slipping of 3D image
 
 <img src="doc/demo.gif" width="800" align="below">
 
-To make the above demo movie, the software 'Vaa3D' was used.
+To make above demo movie, the software 'Vaa3D' was used.
 
 Peng, H., Ruan, Z., Long, F., Simpson, J.H., and Myers, E.W. (2010) "V3D enables real-time 3D visualization and quantitative analysis of large-scale biological image data sets," Nature Biotechnology, Vol. 28, No. 4, pp.348-353. (http://vaa3d.org)
 Peng, H., Bria, A., Zhou, Z., Iannello, G., and Long, F. (2014) "Extensible visualization and analysis for multidimensional images using Vaa3D," Nature Protocols, Vol. 9, No. 1, pp. 193-208. (http://vaa3d.org)
