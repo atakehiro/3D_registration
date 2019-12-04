@@ -55,9 +55,9 @@ toc
 %% 書き込み
 tic
 IMG = cast(moving_reg,['uint',num2str(bit)]);
-imwrite(IMG(:,:,1),[file_path, '3Dreged_', file,'.tif']);
+imwrite(IMG(:,:,1),[file_path, '3Dreged_', file]);
 for t = 2:T
-    imwrite(IMG(:,:,t),[file_path, '3Dreged_', file,'.tif'],'WriteMode','append');
+    imwrite(IMG(:,:,t),[file_path, '3Dreged_', file],'WriteMode','append');
 end
 disp('書き込み完了')
 toc
