@@ -1,14 +1,14 @@
-% MATLAB‚Å‚Í4ŸŒ³ƒCƒ[ƒW‚ğˆê‹C‚É“Ç‚İ‚ß‚È‚¢‚Ì‚ÅAzƒXƒ^ƒbƒN‚ğ1‚Â‚¸‚Â“Ç‚İ‚Ş
-% GPU‚ğg—p‚µ‚Ä‚¢‚é
-% “ü—ÍƒtƒHƒ‹ƒ_‚Æo—ÍƒtƒHƒ‹ƒ_‚ğ‘I‘ğ‚·‚é
-% ƒtƒHƒ‹ƒ_‚ğ‘I‘ğ‚µ‚ÄAÅ‰‚Ìƒtƒ@ƒCƒ‹‚ğƒ^[ƒQƒbƒg‚Æ‚·‚é
+% MATLABã§ã¯4æ¬¡å…ƒã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¸€æ°—ã«èª­ã¿è¾¼ã‚ãªã„ã®ã§ã€zã‚¹ã‚¿ãƒƒã‚¯ã‚’1ã¤ãšã¤èª­ã¿è¾¼ã‚€
+% GPUã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹
+% å…¥åŠ›ãƒ•ã‚©ãƒ«ãƒ€ã¨å‡ºåŠ›ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠã™ã‚‹
+% ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠã—ã¦ã€æœ€åˆã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã™ã‚‹
 
-%% ƒtƒHƒ‹ƒ_‘I‘ğ
+%% ãƒ•ã‚©ãƒ«ãƒ€é¸æŠ
 inputdir = uigetdir;
 S = dir(inputdir);
 outputdir = uigetdir;
 output_path = [outputdir , '/'];
-%% tifƒtƒ@ƒCƒ‹‚Ì“Ç‚İæ‚è(target‚Ì‚šStack)
+%% tifãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿å–ã‚Š(targetã®ï½šStack)
 tic
 path = [inputdir, '/', S(3).name];
 file_info = imfinfo(path);
@@ -20,22 +20,22 @@ raw_IMG = zeros(d1,d2,T);
 for t = 1:T
     raw_IMG(:,:,t) = imread(path, t);
 end
-disp('ƒf[ƒ^“Ç‚İæ‚èŠ®—¹')
+disp('ãƒ‡ãƒ¼ã‚¿èª­ã¿å–ã‚Šå®Œäº†')
 toc
 Target = gpuArray(raw_IMG);
 
-%% 1ƒtƒŒ[ƒ€–Ú‘‚«‚İ
+%% 1ãƒ•ãƒ¬ãƒ¼ãƒ ç›®æ›¸ãè¾¼ã¿
 tic
 IMG = cast(raw_IMG,['uint',num2str(bit)]);
 imwrite(IMG(:,:,1),[output_path, '3Dreged_',  S(3).name,'.tif']);
 for t = 2:T
     imwrite(IMG(:,:,t),[output_path, '3Dreged_', S(3).name,'.tif'],'WriteMode','append');
 end
-disp('‘‚«‚İŠ®—¹')
+disp('æ›¸ãè¾¼ã¿å®Œäº†')
 toc
-%% ƒtƒHƒ‹ƒ_“à‚Ì‘Sˆ—
+%% ãƒ•ã‚©ãƒ«ãƒ€å†…ã®å…¨å‡¦ç†
 for i = 4:size(S,1)
-    %% tifƒtƒ@ƒCƒ‹‚Ì“Ç‚İæ‚è(suorce‚Ì‚šStack)
+    %% tifãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿å–ã‚Š(suorceã®ï½šStack)
     tic
     path = [inputdir, '/', S(i).name];
     file_info = imfinfo(path);
@@ -47,25 +47,25 @@ for i = 4:size(S,1)
     for t = 1:T
         raw_IMG(:,:,t) = imread(path, t);
     end
-    disp('ƒf[ƒ^“Ç‚İæ‚èŠ®—¹')
+    disp('ãƒ‡ãƒ¼ã‚¿èª­ã¿å–ã‚Šå®Œäº†')
     toc
     Source = gpuArray(raw_IMG);
     
-    %% ƒŒƒWƒXƒg
+    %% ãƒ¬ã‚¸ã‚¹ãƒˆ
     tic
     [D,moving_reg] = imregdemons(Source, Target);
     moving_reg = gather(moving_reg);
-    disp('ƒŒƒWƒXƒgŠ®—¹')
+    disp('ãƒ¬ã‚¸ã‚¹ãƒˆå®Œäº†')
     toc
 
-    %% ‘‚«‚İ
+    %% æ›¸ãè¾¼ã¿
     tic
     IMG = cast(moving_reg,['uint',num2str(bit)]);
-    imwrite(IMG(:,:,1),[output_path, '3Dreged_',  S(i).name,'.tif']);
+    imwrite(IMG(:,:,1),[output_path, '3Dreged_',  S(i).name]);
     for t = 2:T
-        imwrite(IMG(:,:,t),[output_path, '3Dreged_', S(i).name,'.tif'],'WriteMode','append');
+        imwrite(IMG(:,:,t),[output_path, '3Dreged_', S(i).name],'WriteMode','append');
     end
-    disp('‘‚«‚İŠ®—¹')
+    disp('æ›¸ãè¾¼ã¿å®Œäº†')
     toc
     
 end
